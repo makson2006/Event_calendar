@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="text-center">
+        {% if searched %}
+            <h1>You searched for</h1>
+            <br/>
+
+            {% for event in events %}
+        <strong>{{ event }}</strong>
+                <ul>
+                    <strong>Date:</strong> {{ event.event_date }}<br/>
+                    <strong>Venue:</strong> {{ event.venue }}<br/>
+                    <strong>Venue WebSite:</strong> <a href="{{ event.venue.web }}" target="_blank">{{ event.venue.web }}</a><br/>
+                    <strong>Manager:</strong> {{ event.manager }}<br/>
+                    <strong>Description:</strong> {{ event.description }}<br/>
+                    <strong>Attendees:</strong> <br/>
+                            {% for user in event.attendees.all %}
+                                {{ user }}
+                            {% endfor %}
+                    </li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h1>You forgot to search for an event...</h1>
+        {% endif %}
+    </div>
+{% endblock %}

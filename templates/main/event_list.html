@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+    xmlns="http://www.w3.org/1999/html">Events</h1>
+ {% for event in event_list %}
+<div class="card">
+  <div class="card-header">
+    {{ event }}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>
+          <ul>
+    <strong>Date:</strong> {{ event.event_date }}<br/>
+    <strong>Venue:</strong> {{ event.venue }}</br>
+<strong>Venue WebSite:</strong> <a href="{{ event.venue.web }}" target="_blank">{{ event.venue.web }}</a></br>
+    <strong>Manager:</strong> {{ event.manager }}</br>
+    <strong>Description:</strong> {{ event.description }}</br>
+    <strong>Attendees:</strong> <br/>
+    {% for user in event.attendees.all %}
+    {{ user }}<br/>
+    {% endfor %}
+
+</ul>
+    </blockquote>
+
+      <div class="card-footer text-muted">
+          <a href="{% url 'delete-event' event.id %}"
+          class="btn btn-outline-danger btn-sm">Delete Event</a>
+      </div>
+  </div>
+</div>
+
+
+
+
+<br>
+{% endfor %}
+{% endblock %}
